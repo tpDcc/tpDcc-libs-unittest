@@ -18,22 +18,22 @@ from tpDcc.libs.python import python
 
 from tpDcc.libs.unittests.core import settings, result
 
-LIB_ID = 'tpDcc-libs-unittests'
-LIB_ENV = LIB_ID.replace('-', '_').upper()
-
 LOGGER = logging.getLogger('tpDcc-libs-unittests')
 
 
 class UnitTestsLib(library.DccLibrary, object):
+
+    ID = 'tpDcc-libs-datalibrary'
+
     def __init__(self, *args, **kwargs):
         super(UnitTestsLib, self).__init__(*args, **kwargs)
 
     @classmethod
-    def config_dict(cls, file_name=None):
-        base_tool_config = library.DccLibrary.config_dict(file_name=file_name)
+    def config_dict(cls):
+        base_tool_config = library.DccLibrary.config_dict()
         tool_config = {
             'name': 'Unit Tests Library',
-            'id': LIB_ID,
+            'id': cls.ID,
             'supported_dccs': {'maya': ['2017', '2018', '2019', '2020']},
             'tooltip': 'Library to manage unit tests in a DCC agnostic way'
         }
@@ -42,7 +42,7 @@ class UnitTestsLib(library.DccLibrary, object):
         return base_tool_config
 
 
-@reroute.reroute_factory(LIB_ID, 'unittestlib')
+@reroute.reroute_factory(UnitTestsLib.ID, 'unittestlib')
 def load_default_unit_tests():
     """
     Loads default unit tests of a specific DCC
@@ -51,7 +51,7 @@ def load_default_unit_tests():
     return list()
 
 
-@reroute.reroute_factory(LIB_ID, 'unittestlib')
+@reroute.reroute_factory(UnitTestsLib.ID, 'unittestlib')
 def run_tests_from_command_line():
     """
     Run the tests in Maya standalone mode
