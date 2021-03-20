@@ -42,7 +42,7 @@ def get_config():
     cfg.VCS = "git"
     cfg.style = "pep440"
     cfg.tag_prefix = "releases/"
-    cfg.parentdir_prefix = "tp-Dcc-libs-unittests-"
+    cfg.parentdir_prefix = "tpDcc-libs-unittests-"
     cfg.versionfile_source = "tpDcc/libs/unittests/_version.py"
     cfg.verbose = False
     return cfg
